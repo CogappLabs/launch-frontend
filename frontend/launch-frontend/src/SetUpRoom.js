@@ -7,10 +7,6 @@ class SetUpRoom extends Component {
         room: this.props.room,
     }
 
-    constructor(props) {
-        super(props);
-    }
-
     assignRoom = data => {
         this.props.socket.emit("joinRoom", this.state.room);
         this.props.onUpdateRoom(this.state.room);

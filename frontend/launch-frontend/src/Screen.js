@@ -2,14 +2,9 @@ import {Component} from "react";
 
 class Screen extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     launchScreen = () => {
         this.props.socket.emit("launchScreen", this.props.screenProps.screenId);
     }
-
 
 
     render() {

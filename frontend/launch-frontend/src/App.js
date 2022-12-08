@@ -1,5 +1,5 @@
 import './App.css';
-import {Component, useState} from "react";
+import {Component} from "react";
 import socketIOClient from "socket.io-client";
 import SetUpRoom from "./SetUpRoom";
 import Screens from "./Screens";
@@ -13,7 +13,7 @@ class App extends Component {
     }
 
     updateRoom(room) {
-        this.state.room = room;
+        this.setState({room: room});
     }
   render() {
       return (

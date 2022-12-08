@@ -7,10 +7,6 @@ class Screens extends Component {
         screens: [],
     }
 
-    constructor(props) {
-        super(props);
-    }
-
     getScreens = () => {
         this.props.socket.on("getScreens", evt => {
             this.setState({screens: evt})
