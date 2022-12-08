@@ -19,13 +19,6 @@ io.on('connection', (socket) => {
     socket.screen = 0;
     socket.room = 'Default';
     socket.screenLaunched = false;
-    const screens = [];
-    for (let [id, socket] of io.of("/").sockets) {
-        screens.push({
-            screenId: id,
-            screenNum: socket.screen,
-        });
-    }
 
     socket.on('joinRoom', (room) => {
         socket.join(room);
@@ -41,12 +34,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on('launchScreen', (screen) => {
-        for (let i = 0; i < this.screens.length; i++) {
-            const screenNum = screen[i].screenNum;
-            if (screenNum == screen) {
-                socket.to(screen[i].screenId).emit('launchScreen', screen)
-            }
-        }
+        socket.to(screen).emit('launchIndividualScreen', true)
+    });
+
+    socket.on('getScreens', () => {
+        const  screens = findScreens();
+        io.to(socket.room).emit('getScreens', screens);
     });
 
     socket.on('setLaunched', (launched) => {
@@ -54,5 +47,16 @@ io.on('connection', (socket) => {
     });
 
 });
+
+function findScreens() {
+    const screens = [];
+    for (let [id, socket] of io.of("/").sockets) {
+        screens.push({
+            screenId: id,
+            screenNum: socket.screen,
+        });
+    }
+    return screens;
+}
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
