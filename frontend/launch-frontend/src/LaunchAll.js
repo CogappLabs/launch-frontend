@@ -2,10 +2,6 @@ import {Component} from "react";
 
 class LaunchAll extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     launchAllScreens = () => {
         this.socket.emit("launchScreens");
     }
