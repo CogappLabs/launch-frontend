@@ -14,7 +14,7 @@ class Screen extends Component {
 
     render() {
         return (
-            <button onClick={launchScreen}>
+            <button onClick={this.launchScreen}>
                 Launch screen {this.props.screenProps.screenNum}
             </button>
         )
